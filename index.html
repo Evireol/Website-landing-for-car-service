@@ -1,0 +1,932 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Автосервис — диагностика, обслуживание и ремонт авто</title>
+  <link rel="icon" type="image/x-icon" href="LOGO_MINI.png">
+  <!-- <script src="map.js"></script> -->
+  <style>
+    /* Сброс базовых стилей */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: #2e2e2e;
+      background-color: #2e2e2e;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .phone-link, .left a, .left .schedule{
+      font-size: 1.2rem;
+    }
+
+/* Шапка сайта */
+header {
+  background-color: #2e2e2e;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+.header{
+  display: grid;
+  grid-template-columns: 1fr;
+  /* grid-auto-rows: auto; */
+  column-gap: 40px;
+}
+
+.header-left {
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+
+.header-center {
+  grid-column-start: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  justify-items: center;
+}
+.header-right {
+  margin-top:10px;
+  margin-bottom:10px;
+  /* justify-items: end; */
+  display: flex;
+  row-gap: 1.7em;
+}
+
+ .header-btn-left
+{
+  margin-right: 1em;
+}
+
+.header-btn-right
+{
+}
+
+.header-center p{
+
+  text-align: right; /* Текст внутри <p> будет справа */
+}
+
+/* Кнопка "Связаться с нами" */
+.header-btn {
+  background-color: #2556a0;
+  color: #ffffff;
+  padding: 8px 15px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+
+}
+
+.header-btn:hover {
+  background-color: #f8f8f8;
+  color: #2e2e2e;
+}
+
+
+
+    /* Hero (баннер) */
+    .hero {
+  background: url('./PiterProfi_LOGO.png') center/contain no-repeat, repeating-radial-gradient(circle,  #242222 0%,  #242222 85%, #242222 100%);
+  padding: 60px 20px;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  height: 400px;
+}
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      line-height: 1.5;
+      color:#2556a0;
+    }
+
+    .hero .cta-btn {
+      background-color: #2556a0;
+      color: #494949;
+      padding: 10px 25px;
+      border-radius: 4px;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+    }
+
+    .hero .cta-btn:hover {
+      background-color: #f8f8f8;
+    }    /* Основной контент */
+    
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .section-title-category {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      margin-left: 20px;
+      text-align: left;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    /* Блок услуг */
+    .services-grid {
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .service-item {
+      background-color: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-item img {
+      width: 100%;
+      height: 57%;
+      object-fit: cover;
+    }
+
+    .service-content {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #2b333f;
+    }
+
+    .service-content h3 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .service-content .btn-group {
+      display:grid;
+      grid-template-columns: repeat(2, minmax(auto, auto));
+      gap: 10px;
+    }
+
+    .service-content-text
+    {
+      color: #fff;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+
+    .service-content .btn {
+      background-color: #2556a0;
+      color: #fff;
+      border-radius: 4px;
+      padding: 8px 15px;
+      font-size: 0.85rem;
+      transition: background-color 0.3s;
+      text-align: center;
+    }
+
+    .service-content .btn:hover {
+      background-color: #2556a0;
+    }
+
+    /* Блок «О нас» */
+    .about {
+      margin-top: 60px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .about img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 4px;
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 250px;
+      color: #fff;
+    }
+
+    .about-text h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .about-text p {
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .price-text {
+      text-align: right;
+      color:#fff;
+      padding: 8px 15px;
+    }
+
+    /* Контактная форма */
+    .contact-section {
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .contact-section .contact-title {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .contact-form {
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .contact-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .contact-form input, select, select:focus , option,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
+
+
+    .button {
+      background-color: #2556a0;
+      color: #ffffff;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #ffffff;
+      color: #494949;
+    }
+
+    #map {
+            width: 100%;
+            height: 500px;
+        }
+
+    [class*="ground-pane"] 
+    {
+        filter: grayscale(1) brightness(1) invert(1);
+        /* filter: hue-rotate(10deg); */
+    }
+            [class*="gototech"] 
+        {
+            display: none !important;
+        }
+        [class*="copyright__link"] 
+        {
+            display: none !important;
+        }
+
+    /* Футер */
+    footer {
+      background-color: #494949;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 60px;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero h2 {
+        font-size: 1.6rem;
+      }
+
+      .services-grid {
+      display:grid;
+      grid-template-columns: repeat(2, minmax(270px, auto));
+      gap: 20px;
+      margin-top: 30px;
+      }
+
+      .header-right  {
+        grid-column-start: 1;
+        grid-row-start: 2;
+        grid-column-end: 3;
+        margin-top: 20px;
+      }
+
+      .header-contact {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+    @media (max-width: 605px) {
+      .services-grid 
+      {
+        display:grid;
+        grid-template-columns: repeat(1, minmax(270px, auto));
+        gap: 20px;
+        margin-top: 30px;
+      }
+      }
+
+    @media (max-width: 450px) {
+      .header {
+        grid-template-columns: 150px;
+        column-gap: 10px;
+      }
+
+      .header-right
+      {
+        display: grid;
+      }
+
+      .header-btn-left
+        {
+          grid-column-start: 1;
+          grid-column-end: 1;
+          grid-row-start: 1;
+          grid-row-end: 1;
+        }
+
+        .header-btn-right
+        {
+          grid-column-start: 1;
+          grid-row-start: 2;
+          grid-row-end: 3;
+        }
+    }
+    @media (max-width: 395px) {
+      
+      .phone-link, .left a, .left .schedule
+      {
+        font-size: 0.7rem;
+      } 
+    }
+    @media (max-width: 314px) {
+      
+      .header
+      {row-gap: 10px;}
+      .header-left {
+        grid-column-start: 1;
+        grid-column-end: 1;
+        grid-row-start: 1;
+        grid-row-end: 1;
+      }
+
+      .header-center {
+        grid-column-start: 1;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        justify-items: center;
+        
+      }
+      .header-right
+      {
+        grid-column-start: 1;
+        grid-row-start: 3;
+        grid-row-end: 4;
+        justify-items: center;
+      }
+
+      .phone-link, .left a, .left .schedule
+      {
+        font-size: 1.0rem;
+      } 
+    }
+    
+    
+  </style>
+</head>
+<body>
+  <!-- Шапка сайта -->
+  <header>
+    <div class="header">
+      <div class="left">
+        <p><a href="https://www.google.com/maps/place/%D0%92%D1%8B%D0%B1%D0%BE%D1%80%D0%B3%D1%81%D0%BA%D0%BE%D0%B5+%D1%88.,+212,+%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3,+194362/@60.0685633,30.2897167,15.25z/data=!4m6!3m5!1s0x46963524d6f986cf:0xb1c5d1f10487d75b!8m2!3d60.0684311!4d30.2913987!16s%2Fg%2F11k374x64y?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">Выборгское шоссе, 212 к12</a></p>
+        <p class="schedule">Пн–Пт с 09:00 до 17:00</p>
+      </div>
+      <div class="header-center">
+        <a class="phone-link" href="tel:+79213740466">+7 (961) 805-08-65</a>
+        <br>
+        <a class="phone-link" href="tel:+79211894426">+7 (921) 189-44-26</a>
+
+      </div>
+      <div class="header-right">
+        <div class="header-btn-left">
+          <a href="#contact" class="header-btn">Связаться с нами</a>
+        </div>
+        <div class="header-btn-right"><a href="#map" class="header-btn">Как нас найти </a></div>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <!-- Меню -->
+    </nav>
+  </header>
+
+  <div class="divider"></div>
+
+  <!-- Hero-блок (баннер) -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+    </div>
+  </section>
+
+  <!-- Основной контент -->
+  <main>
+    <script src="https://api-maps.yandex.ru/v3/?apikey=your_api_key_here&lang=ru_RU"></script>
+
+    <!-- Блок "Наши услуги" -->
+    <h2 class="section-title">Наши услуги</h2>
+    <h2 class="section-title-category">Защита и покрытие</h2>
+    <div class="services-grid">
+      <!-- Пример карточки услуги -->
+      <div class="service-item">
+        <div class="service-content">
+          <p class="service-content-text">Бронирование фар</p>
+          <div class="btn-group">
+            <a href="#contact" class="btn">Записаться</a>
+            <b class="price-text">от 5 000р.</b>
+          </div>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-content">
+          <p class="service-content-text">Бронирование элементов кузова</p>
+          <div class="btn-group">
+            <a href="#contact" class="btn">Записаться</a>
+            <b class="price-text">от 5 000р.</b>
+          </div>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-content">
+          <p class="service-content-text">Покраска элемента</p>
+          <div class="btn-group">
+            <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 8 000р.</b>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+    <br>
+    <h2 class="section-title-category">Кузовные работы</h2>
+
+      <div class="services-grid">
+        <!-- Пример карточки услуги -->
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Ремонт кузова</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 5 000р.</b>
+            </div>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Замена стекол</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 5 000р.</b>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <br>
+      <br>
+      <h2 class="section-title-category">Обслуживание жидкостей и систем</h2>
+      <div class="services-grid">
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Заправка кондиционера</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 3 000р.</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Замена масла</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 1 000р.</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Замена воздушного фильтра</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 500р.</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Замена салонного фильтра</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 500р.</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Замена топливного фильтра</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 1 000р.</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Замена антифриза</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 1 500р.</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Замена тормозной жидкости</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 1 500р.</b>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <br>
+      <br>
+      <h2 class="section-title-category">Ходовая часть и тормозная система</h2>
+      <div class="services-grid">
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Шиномонтаж</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 3 000р.</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Замена тормозных колодок</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 2 000р.</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Замена тормозных дисков</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 3 000р.</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Замена амортизаторов</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 3 000р.</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Замена шаровых опор</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 1 000р.</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Замена рулевых наконечников</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 800р.</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Замена рычагов</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 3 000р.</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Замена ступичных подшипников </p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 3 000р.</b>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <br>
+      <h2 class="section-title-category">Двигатель и трансмиссия</h2>
+      <div class="services-grid">
+
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Замена двигателя</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 30 000р.</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Замена ремня ГРМ</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 8 000р.</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <div class="service-content">
+            <p class="service-content-text">Замена цепи ГРМ</p>
+            <div class="btn-group">
+              <a href="#contact" class="btn">Записаться</a>
+              <b class="price-text">от 15 000р.</b>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Блок «О нас» (пример) -->
+    <section class="about">
+      <!-- <div class="about-text">
+        <h3>О нашем автосервисе</h3>
+        <p>Мы оказываем полный спектр услуг по диагностике, ремонту и обслуживанию автомобилей любых марок и моделей. Благодаря профессиональной команде мастеров и современному оборудованию мы гарантируем высокое качество работ.</p>
+        <p>Наша цель — обеспечить безопасную и комфортную эксплуатацию вашего автомобиля. У нас доступные цены, гибкие способы оплаты и индивидуальный подход к каждому клиенту.</p>
+      </div> -->
+      <div class="about-text" id="map"></div>
+    </section>
+
+
+
+    <!-- Контактная форма -->
+    <section class="contact-section" id="contact">
+      <h3 class="contact-title">Оставьте заявку на обслуживание</h3>
+      <p style="color: #fff;">Оставьте свой номер и опишите проблему, мы свяжемся с вами в ближайшее время!</p>
+      <form class="contact-form" action="sendmail.php" method="POST">
+        <br>
+        <label for="name" style="color: #fff;">Ваше имя</label>
+        <input type="text" id="name" name="name" placeholder="Иван Иванов" required />
+
+        <label for="phone" style="color: #fff;">Ваш телефон</label>
+        <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required />
+
+        <label for="phone" style="color: #fff;">Выбранная услуга (необязательно)</label>
+          <select id="service-select" name="service">
+
+            <option value="Не выбрано">Не выбрано</option>
+
+            <optgroup label="Защита и покрытие">
+              <option value="Бронирование фар">Бронирование фар</option>
+              <option value="Бронирование элементов кузова">Бронирование элементов кузова</option>
+              <option value="Покраска элемента">Покраска элемента</option>
+            </optgroup>
+
+            <optgroup label="Кузовные работы">
+              <option value="Ремонт кузова">Ремонт кузова</option>
+              <option value="Замена стекол">Замена стекол</option>
+            </optgroup>
+
+            <optgroup label="Обслуживание жидкостей и систем">
+              <option value="Заправка кондиционера">Заправка кондиционера</option>
+              <option value="Замена масла">Замена масла</option>
+              <option value="Замена воздушного фильтра">Замена воздушного фильтра</option>
+              <option value="Замена салонного фильтра">Замена салонного фильтра</option>
+              <option value="Замена топливного фильтра">Замена топливного фильтра</option>
+              <option value="Замена антифриза">Замена антифриза</option>
+              <option value="Замена тормозной жидкости">Замена тормозной жидкости</option>
+            </optgroup>
+
+            <optgroup label="Ходовая часть и тормозная система">
+              <option value="Шиномонтаж">Шиномонтаж</option>
+              <option value="Замена тормозных колодок">Замена тормозных колодок</option>
+              <option value="Замена тормозных дисков">Замена тормозных дисков</option>
+              <option value="Замена амортизаторов">Замена амортизаторов</option>
+              <option value="Замена шаровых опор">Замена шаровых опор</option>
+              <option value="Замена рулевых наконечников">Замена рулевых наконечников</option>
+              <option value="Замена рычагов">Замена рычагов</option>
+              <option value="Замена ступичных подшипников">Замена ступичных подшипников</option>
+            </optgroup>
+
+            <optgroup label="Двигатель и трансмиссия">
+              <option value="Замена двигателя">Замена двигателя</option>
+              <option value="Замена ремня ГРМ">Замена ремня ГРМ</option>
+              <option value="Замена цепи ГРМ">Замена цепи ГРМ</option>
+            </optgroup>
+          </select>
+          <!-- Остальные поля формы -->
+
+        <br>
+        <label for="message" style="color: #fff;">Дополнительная информация</label>
+        <textarea id="message" name="message" rows="4" placeholder="Опишите неисправность или задачу"></textarea>
+
+        <button class="header-btn" type="submit">Отправить заявку</button>
+      </form>
+    </section>
+
+      <!-- Подключение API Яндекс.Карт -->
+      <script src="https://api-maps.yandex.ru/2.1/?apikey=ВАШ_API_КЛЮЧ&lang=ru_RU&theme=dark&"></script>
+
+      <!-- Инициализация карты -->
+      <script>
+
+
+      document.addEventListener('DOMContentLoaded', function() {
+        // Инициализация кнопок
+        document.querySelectorAll('.service-item').forEach(item => {
+          const serviceName = item.querySelector('.service-content-text').textContent.trim();
+          const btn = item.querySelector('.btn');
+          btn.dataset.service = serviceName;
+        });
+
+        // Обработка кликов
+        document.querySelectorAll('.btn').forEach(btn => {
+          btn.addEventListener('click', function(e) {
+            const service = this.dataset.service;
+            const select = document.getElementById('service-select');
+            
+            if (select && Array.from(select.options).some(opt => opt.value === service)) {
+              select.value = service;
+              document.querySelector(select).dispatchEvent(new Event('change'));
+            }
+            
+            // Плавная прокрутка к форме
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+              behavior: 'smooth'
+            });
+          });
+        });
+      });
+
+          // Ждем загрузки API
+          ymaps.ready(init);
+  
+          function init() {
+              // Создаем карту
+              const map = new ymaps.Map('map', {
+                  center: [60.032231, 30.330353], // Координаты центра (Москва)
+                  zoom: 10, // Масштаб
+                  controls: [],
+                  settings:"{ theme: 'dark' }"
+              });
+
+              map.controls.remove('geolocationControl'); // удаляем геолокацию
+              map.controls.remove('searchControl'); // удаляем поиск
+              map.controls.remove('trafficControl'); // удаляем контроль трафика
+              map.controls.remove('typeSelector'); // удаляем тип
+              map.controls.remove('fullscreenControl'); // удаляем кнопку перехода в полноэкранный режим
+              map.controls.remove('zoomControl'); // удаляем контрол зуммирования
+              map.controls.remove('rulerControl'); // удаляем контрол правил
+
+              
+  
+              const marker = new ymaps.Placemark([60.068781, 30.289260], {
+                  // hintContent: 'Красная площадь', 
+                  // balloonContent: 'Столица России!'
+              });
+              map.geoObjects.add(marker);
+  
+              map.addChild(new YMapDefaultSchemeLayer({
+                theme: "dark",
+                customization:
+                [
+                {
+                  stylers: 
+                  [
+                    {
+                      saturation: -1
+                    }
+                  ]
+                }
+              ]
+            }));
+
+              // Дополнительные настройки
+              map.controls.remove('geolocationControl'); // Убираем геолокацию
+              map.controls.remove('searchControl'); // Убираем поиск
+          }
+      </script>
+  </main>
+
+  <!-- Футер -->
+  <footer>
+    <p>© 2025 Piter-Profi. Все права защищены.</p>
+    <p><a href="https://www.google.com/maps/place/%D0%92%D1%8B%D0%B1%D0%BE%D1%80%D0%B3%D1%81%D0%BA%D0%BE%D0%B5+%D1%88.,+212,+%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3,+194362/@60.0685633,30.2897167,15.25z/data=!4m6!3m5!1s0x46963524d6f986cf:0xb1c5d1f10487d75b!8m2!3d60.0684311!4d30.2913987!16s%2Fg%2F11k374x64y?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">Выборгское шоссе, 212 к12</a></p>
+    <br>
+    <a class="phone-link" href="tel:+79213740466">+7 (961) 805-08-65</a>
+    <br>
+    <a class="phone-link" href="tel:+79211894426">+7 (921) 189-44-26</a>
+  </footer>
+</body>
+
+</html>
